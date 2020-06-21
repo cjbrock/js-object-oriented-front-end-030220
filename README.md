@@ -1,10 +1,11 @@
-# JavaScript CRUD 
+# JavaScript Object Oriented
 
 ## Agenda
 
-- Event Delegation
-- Edit
-- Delete
+- Factory Functions
+- Constructor Functions
+- OO Classes
+- Refactor!
 
 
 

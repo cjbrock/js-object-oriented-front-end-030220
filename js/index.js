@@ -1,9 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
   loadPosts()
   loadFormListener()
-  clickEvent()
-  mouseOverEvent()
-  buttonEvent()
   eventDelegation()
 })
 
@@ -85,6 +82,8 @@ function addPostsToPage(posts){
   document.querySelector(".post-lists").innerHTML = ""
   posts.forEach(function(post){
     // need to create the post in here
+    const newPost = new Post(post)
+    debugger
     attachPost(postHTML(post))
   })
 }
@@ -109,23 +108,7 @@ function getInfo(){
 }
 
 
-// create our html elements to display the post
-function postHTML(post){
-  return `
-  <div class="card">
-    <div class="card-content" id=${post.id}>
-      <span class="card-title">${post.title}</span>
-      <span class="card-author"><p>${post.author}</p></span>
-      <span class="card-content"><p>${post.content}</p></span>
-      <span class="card-likes"><p class="likes">${post.likes}</p></span>
-      <button class="like-button">Like Me!</button>
-      <button class="update">Update Me!</button>
-      <button class="delete">Delete me? :-(</button>
-    </div>
-  </div>
-  
-  `
-}
+
 
 
 // append the html elements onto the existing list
@@ -200,49 +183,4 @@ async function deletePost(id){
   })
   const data = await resp.json()
   loadPosts()
-}
-
-
-
-const colors = ["red", "orange", "yellow", "green", "blue", "indigo","purple"]
-let index = 0
-const maxIndex = colors.length
-
-const changeColor = (title) => {   
-  title.style.color = colors[index++]
-  if(index == maxIndex){
-      index = 0;
-  }
-}
-
-// click event
-function clickEvent(){
-  const title = document.querySelector(".post-lists h3")
-  title.addEventListener("click", function(){
-      changeColor(title)
-  })
-}
-
-
-// mouse over event
-function mouseOverEvent(){
-  const header = document.querySelector("h1")
-  header.addEventListener("mouseover",()=>changeColor(header))
-}
-
-
-// button event
-function buttonEvent(){
-  const allPosts = document.querySelector(".post-lists")
-  const colors = ["red", "orange", "yellow", "green", "blue", "indigo","purple"]
-  let index = 0
-  const maxIndex = colors.length
-  allPosts.addEventListener("click", function(e){
-      if (e.target.className === "colorButton"){
-          e.target.parentElement.parentElement.style.backgroundColor = colors[index++]
-          if(index == maxIndex){
-              index = 0;
-          }
-      }
-  })
 }
